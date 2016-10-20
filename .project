@@ -39,21 +39,4 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/main/webapp/WEB-INF/resources/css</name>
-			<type>2</type>
-			<location>C:/Users/Megha/Desktop/demo/src/main/webapp/WEB-INF/resources/css</location>
-		</link>
-		<link>
-			<name>src/main/webapp/WEB-INF/resources/fonts</name>
-			<type>2</type>
-			<location>C:/Users/Megha/Desktop/demo/src/main/webapp/WEB-INF/resources/fonts</location>
-		</link>
-		<link>
-			<name>src/main/webapp/WEB-INF/resources/js</name>
-			<type>2</type>
-			<location>C:/Users/Megha/Desktop/demo/src/main/webapp/WEB-INF/resources/js</location>
-		</link>
-	</linkedResources>
 </projectDescription>

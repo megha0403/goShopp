@@ -107,7 +107,8 @@ input, input::-webkit-input-placeholder {
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"
 									aria-hidden="true"></i></span>
-								<form:errors path="customerName" cssStyle="color: #ff0000" />
+								 <form:errors path="customerName" cssClass="error" /> 
+								
 								<form:input path="customerName" id="name" class="form-Control" />
 							</div>
 						</div>
@@ -143,7 +144,7 @@ input, input::-webkit-input-placeholder {
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-users fa"
 									aria-hidden="true"></i>${usernameMsg}</span>
-								<form:errors path="username" cssStyle="color: #ff0000" />
+								<form:errors path="username" cssClass="error" />
 								<form:input path="Username" id="username" class="form-Control" />
 							</div>
 						</div>
@@ -156,7 +157,7 @@ input, input::-webkit-input-placeholder {
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-key"
 									aria-hidden="true"></i></span>
-								<form:errors path="password" cssStyle="color: #ff0000" />
+								<form:errors path="password" cssClass="error" />
 								<form:password path="password" id="password"
 									class="form-Control" />
 							</div>
@@ -166,8 +167,6 @@ input, input::-webkit-input-placeholder {
 						class="btn btn-primary btn-lg btn-block login-button">
 					<a href="<c:url value="/" />"
 						class="btn btn-primary btn-lg btn-block login-button">Cancel</a>
-				</form:form>
-				
-				
+				</form:form>			
 
 				<%@include file="/WEB-INF/views/template/footer.jsp"%>

@@ -166,8 +166,6 @@ input, input::-webkit-input-placeholder {
 						class="btn btn-primary btn-lg btn-block login-button">
 					<a href="<c:url value="/" />"
 						class="btn btn-primary btn-lg btn-block login-button">Cancel</a>
-				</form:form>
-				
-				
+				</form:form>			
 
 				<%@include file="/WEB-INF/views/template/footer.jsp"%>

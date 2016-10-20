@@ -9,5 +9,6 @@ com\goShopp\model\Users.class
 com\goShopp\model\Customer.class
 com\goShopp\service\ProductService.class
 com\goShopp\service\impl\ProductServiceImpl.class
+com\goShopp\model\Item.class
 com\goShopp\service\impl\CustomerServiceImpl.class
 com\goShopp\model\Authorities.class

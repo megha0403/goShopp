@@ -3,12 +3,9 @@ package com.goShopp.dao.impl;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.goShopp.dao.ProductDao;
 import com.goShopp.model.*;
 
@@ -16,7 +13,6 @@ import com.goShopp.model.*;
 @Transactional
 public class ProductDaoImpl implements ProductDao {
 
-	private static final Logger logger = LoggerFactory.getLogger(ProductDaoImpl.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -30,14 +26,13 @@ public class ProductDaoImpl implements ProductDao {
         
 		Session session = this.sessionFactory.getCurrentSession();
 		session.saveOrUpdate(p);
-		logger.info("Product saved successfully, Product Details="+p);
+		
 		
 	}
 
 	public void updateProduct(Product p) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-		logger.info("Product updated successfully, Product Details="+p);
+		session.saveOrUpdate(p);
 		
 	}
 
@@ -45,17 +40,39 @@ public class ProductDaoImpl implements ProductDao {
 	public List<Product> listProducts() {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Product> productsList = session.createQuery("from Product").list();
-		for(Product p : productsList){
-			logger.info("Product List::"+p);
-		}
+		session.flush();
+		return productsList;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Product> listWcategory() {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Product> productsList = session.createQuery("from Product where category='women'").list();
+		session.flush();
+		return productsList;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Product> listMcategory() {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Product> productsList = session.createQuery("from Product where category='men'").list();
 		session.flush();
 		return productsList;
 	}
 
+
+	@SuppressWarnings("unchecked")
+	public List<Product> listKcategory() {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Product> productsList = session.createQuery("from Product where category='kids'").list();
+		session.flush();
+		return productsList;
+	}
+
+
 	public Product getProductById(int id) {
 		Session session = this.sessionFactory.getCurrentSession();		
-		Product p = (Product) session.load(Product.class, new Integer(id));
-		logger.info("Product loaded successfully, Product details="+p);
+		Product p = (Product) session.get(Product.class, new Integer(id));
 		return p;
 	}
 
@@ -65,6 +82,5 @@ public class ProductDaoImpl implements ProductDao {
 		if(null != p){
 			session.delete(p);
 		}
-		logger.info("Product deleted successfully, product details="+p);
 	}
 	}

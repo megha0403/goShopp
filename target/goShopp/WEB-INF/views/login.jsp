@@ -18,7 +18,7 @@
 				</c:if>
 				<div class="imgcontainer">
 					<span class="close" title="Close">&times;</span>
-					<img src="C:\Users\Megha\Desktop\icon.png" alt="Avatar"
+					<img src="<c:url value="/resources/images/icon.png" />" alt="Avatar"
 						class="avatar">
 				</div>
 				<div class="form-group">

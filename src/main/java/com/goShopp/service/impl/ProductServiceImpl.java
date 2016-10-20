@@ -23,22 +23,39 @@ public class ProductServiceImpl implements ProductService {
 		this.productDao.addProduct(p);
 		
 	}
-
+@Transactional
 	public void updateProduct(Product p) {
 		this.productDao.updateProduct(p);
 	}
-
+@Transactional
 	public List<Product> listProducts() {
 		// TODO Auto-generated method stub
 		return this.productDao.listProducts();
 	}
+@Transactional
+public List<Product> listWcategory() {
+	// TODO Auto-generated method stub
+	return this.productDao.listWcategory();
+}
 
+@Transactional
 	public Product getProductById(int id) {
 		// TODO Auto-generated method stub
 		return this.productDao.getProductById(id);
 	}
-
+@Transactional
 	public void removeProduct(int id) {
 		this.productDao.removeProduct(id);
 	}
+@Transactional
+public List<Product> listMcategory() {
+	// TODO Auto-generated method stub
+	return this.productDao.listMcategory();
+
+}
+@Transactional
+public List<Product> listKcategory() {
+	// TODO Auto-generated method stub
+	return this.productDao.listKcategory();
+}
 	}

@@ -1,10 +1,8 @@
 package com.goShopp.controller;
-
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,29 +15,49 @@ import com.goShopp.model.Customer;
 import com.goShopp.service.CustomerService;
 import com.goShopp.model.Product;
 import com.goShopp.service.ProductService;
+import com.google.gson.Gson;
 
 @Controller
 public class controller {
-
-	@Autowired
-    private ProductService productService;
+	 @Autowired
+	    private ProductService productService;
 	
 	
 	@RequestMapping("/")
 	public String home() {
 		return "index";
 	}
+	
+	@RequestMapping("/confirmation")
+	public String conf() {
+		return "confirmation";
+	}
+	
+	@RequestMapping("/shipping")
+	public String ship() {
+		return "shipping";
+	}
+	
+	
+	@RequestMapping("/goShopp")
+	public String home1() {
+		return "index";
+	}
+	
+	@RequestMapping("/Home")
+	public String index() {
+		return "index";
+	}
+
+	@RequestMapping("/cart")
+	public String cart() {
+		return "cart";
+	}
 
 	@RequestMapping("/admin")
 	public String adminpage() {
 		return "admin";
 	}
-
-	/* @RequestMapping("/addnewproduct")
-	public String Product() {
-		return "addnewproduct";
-	}*/
-
 	
 	@RequestMapping("/registersuccess")
 	public String registersuccesspage() {
@@ -107,30 +125,18 @@ public class controller {
 
 				return "register";
 			}
+			
 		}
-
 		customer.setEnabled(true);
 		customerService.addCustomer(customer);
 
 		return "registersuccess";
 
 	}
-	/*
-	@Autowired(required=true)
-	@Qualifier(value="productService")
-	*/
 	public void setProductService(ProductService ps){
 		this.productService = ps;
 	}
-	
-	
-	/*@RequestMapping(value = "/products", method = RequestMethod.GET)
-	public String listProducts(Model model) {
-		model.addAttribute("product", new Product());
-		model.addAttribute("listProducts", this.productService.listProducts());
-		return "addnewproduct";
-	}*/
-	
+		
 	@RequestMapping(value="/addnewproduct", method = RequestMethod.GET)
 	public String showaddnewproduct(Model model) {
 
@@ -147,14 +153,14 @@ public class controller {
 	@RequestMapping(value= "/add", method = RequestMethod.GET)
 	public String addProduct(@ModelAttribute("product")Product product,BindingResult r) {
 		
-		  System.out.print("\n\ninside controller = "+product.toString()); 
+		  
         if(product.getId() == 0){       	
 			this.productService.addProduct(product);
 		}else{
 			this.productService.updateProduct(product);
 		}
 		
-		return "redirect:/addsuccess";
+		return "redirect:/showproducts";
 		
 	}
 	
@@ -166,30 +172,69 @@ public class controller {
 
 		return "showproducts";
     }
-	
-	@RequestMapping("/remove/{id}")
-    public String removeProduct(@PathVariable("id") int id){
-		
-        this.productService.removeProduct(id);
-        return "redirect:/products";
+/*
+	@RequestMapping("/ngtable")
+    public String showlistall2(Model model) {
+        
+		 List<Product> product = productService.listProducts();
+	        //model.addAttribute("product", product);
+	        Gson json=new Gson();
+	        String list=json.toJson(product);
+	        System.out.println("inside ngtable:"+list);
+	        model.addAttribute("list", list);	        
+
+		return "ngtable";
     }
- 
+*/	@RequestMapping(value= "/remove/{id}", method = RequestMethod.GET)
+	public String removeProduct(@PathVariable("id") int id,@ModelAttribute("product")Product product,BindingResult r) {
+		
+		  System.out.print("\n\ninside controller = "+product.toString()); 
+        if(product.getId() != 0){       	
+			this.productService.removeProduct(id);
+        }
+		return "redirect:/showproducts";
+		
+	}
+	
     @RequestMapping("/edit/{id}")
-    public String editPerson(@PathVariable("id") int id, Model model){
+    public String editProduct(@PathVariable("id") int id, Model model){
         model.addAttribute("product", this.productService.getProductById(id));
         model.addAttribute("listProducts", this.productService.listProducts());
         return "addnewproduct";
     }
-   /* @RequestMapping("/addnewproduct")
-    public String showlistall(Model model) {
-        
-		 List<Product> p = productService.listProducts();
-	        model.addAttribute("p", p);
-
-		return "addnewproduct";
+    
+    @RequestMapping("/viewProduct/{id}")
+    public String viewProduct(@PathVariable int id, Model model) throws IOException{
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
+        return "viewProduct";
     }
-	*/
+    @RequestMapping("/womencloth")
+    public String showlist(Model model) {
+        
+		 List<Product> product = productService.listWcategory();
+	        model.addAttribute("product", product);
+
+		return "womencloth";
+    }
+
+    @RequestMapping("/mencloth")
+    public String showMlist(Model model) {
+        
+		 List<Product> product = productService.listMcategory();
+	        model.addAttribute("product", product);
+
+		return "mencloth";
+    }
+    
+    @RequestMapping("/kidscloth")
+    public String showKlist(Model model) {
+        
+		 List<Product> product = productService.listKcategory();
+	        model.addAttribute("product", product);
+
+		return "kidscloth";
+    }
 
 
-	
-}
+  }

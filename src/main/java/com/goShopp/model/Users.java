@@ -3,6 +3,8 @@ package com.goShopp.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -11,7 +13,11 @@ public class Users{
     @Id
     @GeneratedValue
     private int usersId;
+    
+    @Size(min=3 , max=30)
     private String username;
+    
+    @NotNull
     private String password;
     private boolean enabled;
     private int customerId;

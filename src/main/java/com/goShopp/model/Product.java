@@ -6,6 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="PRODUCT")
@@ -16,13 +20,19 @@ public class Product {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@NotEmpty
 	private String name;
 	
+	@NotEmpty
 	private Integer price;
 	
+	@NotEmpty
 	private Integer quantity;
 	
+	@NotEmpty
 	private String category;
+	 @Transient
+	    private MultipartFile productImage;
 
 		
 	public int getId() {
@@ -73,6 +83,15 @@ public class Product {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
+
+
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
+	}
+
 
 
 	@Override
